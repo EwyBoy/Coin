@@ -1,0 +1,18 @@
+#Coin Lang-File
+
+#Blocks
+tile.BlockBank.name=Bank
+tile.BlockBanker.name=Banker
+tile.BlockExchanger.name=Exchanger
+tile.BlockTaxer.name=Taxer
+tile.BlockMarket.name=Market
+
+#Items
+item.ItemCoinCopper.name=Copper Coin
+item.ItemCoinBronze.name=Bronze Coin
+item.ItemCoinSilver.name=Silver Coin
+item.ItemCoinGold.name=Gold Coin
+item.ItemCoinPlatinum.name=Platinum Coin
+
+#CreativeTab
+itemGroup.Coin=§n§l§eCoin
