@@ -1,6 +1,7 @@
 package com.ewyboy.coin;
 
 import com.ewyboy.coin.Commands.CoinCommandBase;
+import com.ewyboy.coin.Economics.PlayerWallet;
 import com.ewyboy.coin.Events.CoinEventHandler;
 import com.ewyboy.coin.Loaders.BlockLoader;
 import com.ewyboy.coin.Loaders.CoinLoader;
@@ -31,16 +32,6 @@ public class Coin {
 
     private long launchTime;
 
-    @Mod.EventHandler
-    public void serverStartInit(FMLServerStartingEvent event) {
-        Logger.info("Hay Ewy! I am starting..");
-    }
-
-    @Mod.EventHandler
-    public void serverCloseInit(FMLServerStoppingEvent event) {
-        Logger.info("Bye Ewy! I am closing..");
-    }
-
     public static CoinEventHandler coinEventHandler;
 
     @Mod.EventHandler
@@ -52,6 +43,11 @@ public class Coin {
             ServerCommandManager manager = (ServerCommandManager) command;
             manager.registerCommand(new CoinCommandBase());
         Logger.info("Commands successfully loaded after + " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms");
+    }
+
+    @Mod.EventHandler
+    public void onServerClosing(FMLServerStoppingEvent event) {
+
     }
 
     @Mod.EventHandler

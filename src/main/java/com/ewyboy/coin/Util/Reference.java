@@ -1,7 +1,5 @@
 package com.ewyboy.coin.Util;
 
-import com.ewyboy.coin.Loaders.ConfigLoader;
-
 public class Reference {
 
     public static final class ModInfo {
@@ -25,6 +23,8 @@ public class Reference {
         public static final String DIRECTION = "TileEntityDirection";
         public static final String PLAYERWALLET = "PlayerWallet";
         public static final String HASPLAYERJOINEDBEFORE = "HasPlayerJoinedBefore";
+        public static final String USERNAME = "Username";
+        public static final String ISPLAYERONLINE = "IsPlayerOnline";
         public static final String SIDE = "Side";
     }
 
