@@ -1,8 +1,10 @@
 package com.ewyboy.coin.Blocks;
 
+import com.ewyboy.coin.Database.PlayerDatabase;
 import com.ewyboy.coin.Items.ItemCoin;
 import com.ewyboy.coin.Loaders.CoinLoader;
 import com.ewyboy.coin.TileEntities.TileExchanger;
+import com.ewyboy.coin.Util.Logger;
 import com.ewyboy.coin.Util.Reference;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.ITileEntityProvider;
@@ -52,6 +54,8 @@ public class Exchanger extends BaseBlock implements ITileEntityProvider {
                 return true;
             }
         }
+        PlayerDatabase playerDatabase = new PlayerDatabase();
+        Logger.info("Is Player Online: " + playerDatabase.isPlayerOnline(player));
         return false;
     }
 
