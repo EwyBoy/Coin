@@ -1,7 +1,6 @@
 package com.ewyboy.coin.Events;
 
 import com.ewyboy.coin.Economics.PlayerWallet;
-import com.ewyboy.coin.Loaders.ConfigLoader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,7 +24,6 @@ public class CoinEventHandler {
             playerWallet.setMoney(playerWallet.getPlayerWalletAmount(event.player), event.player);
             playerWallet.syncPlayerWalletToNBT(event.player);
         }
-
         playerNBT.setBoolean(NBT.ISPLAYERONLINE + playerName, true);
     }
 
