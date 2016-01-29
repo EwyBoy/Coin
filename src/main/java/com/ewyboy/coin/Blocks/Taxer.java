@@ -24,13 +24,12 @@ public class Taxer extends BaseBlock implements ITileEntityProvider {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
         TileTaxer tile = getTileEntity(world, x, y, z);
         if (!world.isRemote) {
-            tile.processActivation(world, side);
         }
         return true;
     }
 
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileTaxer();
+        return new TileTaxer(5000,10);
     }
 }

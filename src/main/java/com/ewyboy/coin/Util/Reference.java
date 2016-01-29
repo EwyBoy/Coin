@@ -25,7 +25,9 @@ public class Reference {
         public static final String HASPLAYERJOINEDBEFORE = "HasPlayerJoinedBefore";
         public static final String USERNAME = "Username";
         public static final String ISPLAYERONLINE = "IsPlayerOnline";
-        public static final String SIDE = "Side";
+        public static final String CAPACITY = "Capacity";
+        public static final String TRANSFER = "Transfer";
+        public static final String ENERGYSTORED = "EnergyStored";
     }
 
     public static final class BlockNames {

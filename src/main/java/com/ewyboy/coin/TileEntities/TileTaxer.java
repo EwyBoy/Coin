@@ -1,57 +1,66 @@
 package com.ewyboy.coin.TileEntities;
 
-import com.ewyboy.coin.Loaders.BlockLoader;
-import com.ewyboy.coin.Util.Logger;
+import cofh.api.energy.EnergyStorage;
+import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.TileEnergyHandler;
+import com.ewyboy.coin.Util.Reference;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
-import static com.ewyboy.coin.Util.Reference.NBT;
+public class TileTaxer extends TileEnergyHandler implements IEnergyHandler {
 
-public class TileTaxer extends TileBase {
+    private EnergyStorage energy;
 
-    public boolean side0, side1, side2, side3, side4, side5;
-    public boolean[] side = {side0, side1, side2, side3, side4, side5};
-
-    public void processActivation(World world, int side) {
-        switch (side) {
-            case 0: side0 = true;
-                break;
-            case 1: side1 = true;
-                break;
-            case 2: side2 = true;
-                break;
-            case 3: side3 = true;
-                break;
-            case 4: side4 = true;
-                break;
-            case 5: side5 = true;
-                break;
-        }
-
-        Logger.info("" +
-                "Side0: " + side0 + " , " +
-                "Side1: " + side1 + " , " +
-                "Side2: " + side2 + " , " +
-                "Side3: " + side3 + " , " +
-                "Side4: " + side4 + " , " +
-                "Side5: " + side5 + " , "
-        );
-        world.notifyBlockChange(xCoord,yCoord,zCoord, BlockLoader.Taxer);
+    public TileTaxer(int capacity, int transfer) {
+        energy = new EnergyStorage(capacity, transfer);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        for (int i = 0; i < side.length; i++) {
-            this.side[i] = nbt.getBoolean(NBT.SIDE + i);
-        }
+        energy.setEnergyStored(nbt.getInteger(Reference.NBT.ENERGYSTORED));
+        energy.setCapacity(nbt.getInteger(Reference.NBT.CAPACITY));
+        energy.setMaxTransfer(nbt.getInteger(Reference.NBT.TRANSFER));
+        energy.readFromNBT(nbt);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
-        for (int i = 0; i < side.length; i++) {
-            nbt.setBoolean(NBT.SIDE + i, side[i]);
+        nbt.setInteger(Reference.NBT.ENERGYSTORED, energy.getEnergyStored());
+        nbt.setInteger(Reference.NBT.CAPACITY, energy.getMaxEnergyStored());
+        nbt.setInteger(Reference.NBT.TRANSFER, energy.getMaxExtract());
+        energy.writeToNBT(nbt);
+    }
+
+    @Override
+    public boolean canConnectEnergy(ForgeDirection from) {
+        return true;
+    }
+
+    @Override
+    public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
+        if (from != ForgeDirection.UP) {
+            return 0;
         }
+        return energy.receiveEnergy(maxReceive,simulate);
+    }
+
+    @Override
+    public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
+        if (from != ForgeDirection.DOWN) {
+            return 0;
+        }
+        return energy.extractEnergy(maxExtract,simulate);
+    }
+
+    @Override
+    public int getEnergyStored(ForgeDirection from) {
+        return energy.getEnergyStored();
+    }
+
+    @Override
+    public int getMaxEnergyStored(ForgeDirection from) {
+        return energy.getMaxEnergyStored();
     }
 }
